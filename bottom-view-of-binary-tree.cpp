@@ -5,6 +5,8 @@
 // Time complexity - O(N)
 // Space complexity - O(N)
 
+// Recursive implementation will not simply work here, we have to induce extra logic of height also. The deepest height will have to be stored.
+
 
 vector<int> bottomViewOfBinaryTree(TreeNode* root){
   vector<int>res;
