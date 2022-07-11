@@ -4,6 +4,7 @@
 // queue<node,vertical,level>
 // map<int,map<int,multiset<int>>>  --->  map<vertical,map<level,multiset<nodes>>>
 // multiset is taken as there can be nodes with same value.
+// we are using "map" here as map stores everything in sorted fashion of keys.
 
 // Time complexity - O(NlogN) --> logN due to the multiset or priority queue
 // Space complexity - O(N)+O(N)+O(N) --> third O(N) due to some variables we have taken
