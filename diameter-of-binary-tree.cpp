@@ -1,4 +1,6 @@
 // Diameter of binary tree is defined as "The longest path between any two nodes."
+// The longest path (or diameter) does not need to pass through root
+// In any path, each node will come only once.
 
 // Naive approach
 // Time complexity - O(N^2)
