@@ -10,7 +10,7 @@ int ceilInBST(TreeNode* root, int key){
       root = root->right;
     }else{
       ceil = root->val;
-      root = root->right;
+      root = root->left;
     }
   }
   return ceil;
