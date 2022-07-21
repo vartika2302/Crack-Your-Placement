@@ -6,12 +6,13 @@ public:
             pq.push({abs(arr[i]-x),arr[i]});
             if(pq.size()>k) pq.pop();
         }
-        vector<int>ans;
+        
+        multiset<int>m;
         while(!pq.empty()) {
-            ans.push_back(pq.top().second);
+            m.insert(pq.top().second);
             pq.pop();
         };
-        sort(ans.begin(),ans.end());
+        vector<int>ans(m.begin(),m.end());
         return ans;
     }
 };
