@@ -7,12 +7,12 @@ public:
             if(pq.size()>k) pq.pop();
         }
         
-        multiset<int>m;
+        vector<int>ans;
         while(!pq.empty()) {
-            m.insert(pq.top().second);
+            ans.push_back(pq.top().second);
             pq.pop();
         };
-        vector<int>ans(m.begin(),m.end());
+        sort(ans.begin(),ans.end());
         return ans;
     }
 };
