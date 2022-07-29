@@ -17,12 +17,27 @@ public:
         return dp[i][j]=min(down,diagonal);
     }
     
+    // TABULATION
+     
+    
     int minimumTotal(vector<vector<int>>& triangle) {
         
         int m = triangle.size();
         int n = triangle[m-1].size();
         // return f(0,0,m,triangle);
         vector<vector<int>>dp(m,vector<int>(n,-1));
-        return fMem(0,0,m,triangle,dp);
+        // return fMem(0,0,m,triangle,dp);
+        // BASE CASE
+        for(int j=0;j<n;j++){
+            dp[m-1][j]=triangle[m-1][j];
+        }
+        for(int i=(m-2);i>=0;i--){
+            for(int j=i;j>=0;j--){
+                int down = triangle[i][j]+dp[i+1][j];
+                int diagonal = triangle[i][j]+dp[i+1][j+1];
+                dp[i][j]=min(down,diagonal);
+            }
+        }
+        return dp[0][0];
     }
 };
