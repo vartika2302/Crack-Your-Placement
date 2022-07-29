@@ -19,6 +19,18 @@ public:
         return dp[n]=max(pick,notpick);
     }
         
+    // TABULATION
+    int fTab(int n,vector<int>& nums,vector<int>& dp) {
+        dp[0]=nums[0];
+        for(int i=1;i<=n;i++){
+            int pick = nums[i];
+            if(i>1) pick+=dp[i-2];
+            int notpick = 0+dp[i-1];
+            dp[i]=max(pick,notpick);
+        }
+        return dp[n];
+    }
+    
     int rob(vector<int>& nums) {
         int n=nums.size();
         if(n==1) return nums[0];
@@ -32,6 +44,8 @@ public:
          vector<int>dp1(m,-1);
         vector<int>dp2(m,-1);
         // return max(f(m-1,temp1),f(m-1,temp2));
-        return max(fMem(m-1,temp1,dp1),fMem(m-1,temp2,dp2));
+        // return max(fMem(m-1,temp1,dp1),fMem(m-1,temp2,dp2));
+        return max(fTab(m-1,temp1,dp1),fTab(m-1,temp2,dp2));
+        
     }
 };
