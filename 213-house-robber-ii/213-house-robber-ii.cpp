@@ -31,6 +31,22 @@ public:
         return dp[n];
     }
     
+    // SPACE OPTIMIZATION
+    int fSpaceOptimize(int n, vector<int>& nums) {
+        int prev2;
+        int prev=nums[0];
+        for(int i=1;i<=n;i++){
+            int pick = nums[i];
+            if(i>1) pick+=prev2;
+            int notpick=0+prev;
+            int curr = max(pick,notpick);
+            prev2=prev;
+            prev=curr;
+        }
+        return prev;
+    }
+    
+    
     int rob(vector<int>& nums) {
         int n=nums.size();
         if(n==1) return nums[0];
@@ -45,7 +61,7 @@ public:
         vector<int>dp2(m,-1);
         // return max(f(m-1,temp1),f(m-1,temp2));
         // return max(fMem(m-1,temp1,dp1),fMem(m-1,temp2,dp2));
-        return max(fTab(m-1,temp1,dp1),fTab(m-1,temp2,dp2));
-        
+//         return max(fTab(m-1,temp1,dp1),fTab(m-1,temp2,dp2));
+        return max(fSpaceOptimize(m-1,temp1),fSpaceOptimize(m-1,temp2));
     }
 };
