@@ -32,7 +32,7 @@ public:
         }
         
         // Imp condition
-        if (nums[0]==s/2) dp[0][nums[0]]=true;
+        if (nums[0]<=s/2) dp[0][nums[0]]=true;
         
         for(int idx=1;idx<n;idx++){
             for(int target=1;target<=(s/2);target++){
