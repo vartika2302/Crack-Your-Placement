@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+    // RECURSION & MEMOIZATION
     int f(int idx, vector<int>& coins, int target, vector<vector<int>>& dp) {
         
         // Base cases
@@ -17,7 +17,25 @@ public:
     
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        vector<vector<int>> dp(n,vector<int>(amount+1,-1));
-        return f(n-1,coins,amount,dp);
+        // vector<vector<int>> dp(n,vector<int>(amount+1,-1));
+        // return f(n-1,coins,amount,dp);
+        
+        
+        // TABULATION
+        vector<vector<int>> dp(n,vector<int>(amount+1,0));
+        
+        for(int t=0;t<=amount;t++){
+            dp[0][t] = (t%coins[0]==0) ? 1 : 0;
+        }
+        
+        for(int i=1;i<n;i++){
+            for(int t=0;t<=amount;t++){
+                int not_take = dp[i-1][t];
+                int take=0;
+                if(t>=coins[i]) take = dp[i][t-coins[i]];
+                dp[i][t] = not_take+take;
+            }
+        }
+        return dp[n-1][amount];
     }
 };
