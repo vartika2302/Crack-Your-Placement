@@ -23,20 +23,38 @@ public:
         // if(ans==1e9) return -1;
         // else return ans;
         
+        // TABULATION
+//         vector<vector<int>> dp(n,vector<int>(amount+1,0));
+//         for(int i=0;i<=amount;i++){
+//             dp[0][i] = (i%coins[0]==0 ? i/coins[0] : 1e9);
+//         }
         
-        vector<vector<int>> dp(n,vector<int>(amount+1,0));
+//         for(int i=1;i<n;i++){
+//             for(int tar=0;tar<=amount;tar++){
+//                 int not_take = 0 + dp[i-1][tar];
+//                 int take = 1e9;
+//                 if(tar>=coins[i]) take = 1 + dp[i][tar-coins[i]];
+//                 dp[i][tar] = min(take,not_take);
+//             }
+//         }
+//         return dp[n-1][amount]==1e9 ? -1 : dp[n-1][amount];
+        
+        // SPACE OPTIMIZATION
+        vector<int>prev(amount+1,0),curr(amount+1,0);
         for(int i=0;i<=amount;i++){
-            dp[0][i] = (i%coins[0]==0 ? i/coins[0] : 1e9);
+            prev[i] = (i%coins[0]==0 ? i/coins[0] : 1e9);
         }
         
         for(int i=1;i<n;i++){
             for(int tar=0;tar<=amount;tar++){
-                int not_take = 0 + dp[i-1][tar];
+                int not_take = 0 + prev[tar];
                 int take = 1e9;
-                if(tar>=coins[i]) take = 1 + dp[i][tar-coins[i]];
-                dp[i][tar] = min(take,not_take);
+                if(tar>=coins[i]) take = 1 + curr[tar-coins[i]];
+                curr[tar] = min(take,not_take);
             }
+            prev=curr;
         }
-        return dp[n-1][amount]==1e9 ? -1 : dp[n-1][amount];
+        return prev[amount]==1e9 ? -1 : prev[amount];
+        
     }
 };
