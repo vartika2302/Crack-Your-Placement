@@ -22,20 +22,41 @@ public:
         
         
         // TABULATION
-        vector<vector<int>> dp(n,vector<int>(amount+1,0));
+//         vector<vector<int>> dp(n,vector<int>(amount+1,0));
         
+        
+//         for(int t=0;t<=amount;t++){
+//             dp[0][t] = (t%coins[0]==0) ? 1 : 0;
+//         }
+        
+//         for(int i=1;i<n;i++){
+//             for(int t=0;t<=amount;t++){
+//                 int not_take = dp[i-1][t];
+//                 int take=0;
+//                 if(t>=coins[i]) take = dp[i][t-coins[i]];
+//                 dp[i][t] = not_take+take;
+//             }
+//         }
+//         return dp[n-1][amount];
+        
+        
+        // SPACE OPTIMIZATION
+        vector<int>prev(amount+1,0),curr(amount+1,0);
         for(int t=0;t<=amount;t++){
-            dp[0][t] = (t%coins[0]==0) ? 1 : 0;
+            prev[t] = (t%coins[0]==0) ? 1 : 0;
         }
-        
         for(int i=1;i<n;i++){
             for(int t=0;t<=amount;t++){
-                int not_take = dp[i-1][t];
+                 int not_take = prev[t];
                 int take=0;
-                if(t>=coins[i]) take = dp[i][t-coins[i]];
-                dp[i][t] = not_take+take;
+                if(t>=coins[i]) take = curr[t-coins[i]];
+                curr[t] = not_take+take;
             }
+            prev = curr;
         }
-        return dp[n-1][amount];
+        return prev[amount];
+        
+        
+        
     }
 };
