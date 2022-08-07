@@ -20,16 +20,29 @@ public:
         // vector<vector<int>>dp(n,vector<int>(2,-1));
         // return f(0,1,prices,profit,dp);
         
-        // Tabulation
+//         // Tabulation
         
-        vector<vector<int>>dp(n+1,vector<int>(2,0));
-        dp[n][0] = dp[n][1] = 0;
+//         vector<vector<int>>dp(n+1,vector<int>(2,0));
+//         dp[n][0] = dp[n][1] = 0;
+//         for(int idx=(n-1);idx>=0;idx--){
+//             for(int buy=0;buy<=1;buy++){
+//                 if(buy) dp[idx][buy] = max(-prices[idx]+dp[idx+1][0],0+dp[idx+1][1]);
+//                 else dp[idx][buy] = max(prices[idx]+dp[idx+1][1],0+dp[idx+1][0]);
+//             }
+//         }
+//         return dp[0][1];
+        
+        
+        // Space optimised
+        vector<int>ahead(2,0),curr(2,0);
+        ahead[0] = ahead[1] = 0;
         for(int idx=(n-1);idx>=0;idx--){
             for(int buy=0;buy<=1;buy++){
-                if(buy) dp[idx][buy] = max(-prices[idx]+dp[idx+1][0],0+dp[idx+1][1]);
-                else dp[idx][buy] = max(prices[idx]+dp[idx+1][1],0+dp[idx+1][0]);
+                if(buy) curr[buy] = max(-prices[idx]+ahead[0],0+ahead[1]);
+                else curr[buy] = max(prices[idx]+ahead[1],0+ahead[0]);
             }
+            ahead = curr;
         }
-        return dp[0][1];
+        return ahead[1];
     }
 };
