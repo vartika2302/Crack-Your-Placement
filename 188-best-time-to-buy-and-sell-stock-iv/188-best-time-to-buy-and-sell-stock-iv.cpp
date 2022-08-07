@@ -44,8 +44,19 @@ public:
         
         
         
-        vector<vector<int>>dp(n,vector<int>(2*k,-1));
-        return fOptimized(0,0,prices,n,2*k,dp);
+        // by the help of transaction numbers.
+        // vector<vector<int>>dp(n,vector<int>(2*k,-1));
+        // return fOptimized(0,0,prices,n,2*k,dp);
         
+        
+        // Space optimization
+        vector<vector<int>>dp(n+1,vector<int>(2*k+1,0));
+        for(int idx=(n-1);idx>=0;idx--){
+            for(int tr=(2*k)-1;tr>=0;tr--){
+                if(tr%2==0) dp[idx][tr] = max(-prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
+                else dp[idx][tr] = max(prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
+            }
+        }
+        return dp[0][0];
     }
 };
