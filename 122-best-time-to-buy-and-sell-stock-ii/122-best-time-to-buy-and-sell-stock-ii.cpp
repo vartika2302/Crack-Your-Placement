@@ -33,16 +33,32 @@ public:
 //         return dp[0][1];
         
         
-        // Space optimised
-        vector<int>ahead(2,0),curr(2,0);
-        ahead[0] = ahead[1] = 0;
+        // // Space optimised
+        // vector<int>ahead(2,0),curr(2,0);
+        // ahead[0] = ahead[1] = 0;
+        // for(int idx=(n-1);idx>=0;idx--){
+        //     for(int buy=0;buy<=1;buy++){
+        //         if(buy) curr[buy] = max(-prices[idx]+ahead[0],0+ahead[1]);
+        //         else curr[buy] = max(prices[idx]+ahead[1],0+ahead[0]);
+        //     }
+        //     ahead = curr;
+        // }
+        // return ahead[1];
+        
+        
+        // Using four variables
+        int aheadBuy = 0;
+        int aheadNotBuy = 0;
         for(int idx=(n-1);idx>=0;idx--){
-            for(int buy=0;buy<=1;buy++){
-                if(buy) curr[buy] = max(-prices[idx]+ahead[0],0+ahead[1]);
-                else curr[buy] = max(prices[idx]+ahead[1],0+ahead[0]);
-            }
-            ahead = curr;
+            // Buy
+            int currBuy = max(-prices[idx]+aheadNotBuy,0+aheadBuy);
+            
+            // Not buy
+            int currNotBuy = max(prices[idx]+aheadBuy,0+aheadNotBuy);
+            aheadBuy = currBuy;
+            aheadNotBuy = currNotBuy;
         }
-        return ahead[1];
+        return aheadBuy;
+        
     }
 };
