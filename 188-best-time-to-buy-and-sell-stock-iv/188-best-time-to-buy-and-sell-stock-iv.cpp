@@ -50,13 +50,25 @@ public:
         
         
         // Space optimization
-        vector<vector<int>>dp(n+1,vector<int>(2*k+1,0));
+        // vector<vector<int>>dp(n+1,vector<int>(2*k+1,0));
+        // for(int idx=(n-1);idx>=0;idx--){
+        //     for(int tr=(2*k)-1;tr>=0;tr--){
+        //         if(tr%2==0) dp[idx][tr] = max(-prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
+        //         else dp[idx][tr] = max(prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
+        //     }
+        // }
+        // return dp[0][0];
+        
+        vector<int>after(2*k+1,0),curr(2*k+1,0);
         for(int idx=(n-1);idx>=0;idx--){
             for(int tr=(2*k)-1;tr>=0;tr--){
-                if(tr%2==0) dp[idx][tr] = max(-prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
-                else dp[idx][tr] = max(prices[idx]+dp[idx+1][tr+1],dp[idx+1][tr]);
+                if(tr%2==0) curr[tr] = max(-prices[idx]+after[tr+1],after[tr]);
+                else curr[tr] = max(prices[idx]+after[tr+1],after[tr]);
             }
+            after=curr;
         }
-        return dp[0][0];
+        return after[0];
+        
+        
     }
 };
