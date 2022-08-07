@@ -4,9 +4,9 @@ private:
     int f(int idx, int buy, int cap, vector<int>& prices, vector<vector<vector<int>>>& dp) {
         
         // Base cases
-        
+        if(cap==0) return 0;
         if(idx==prices.size()) return 0;
-        if(cap<=0) return 0;
+        
         
         if(dp[idx][buy][cap]!=-1) return dp[idx][buy][cap];
         int profit;
