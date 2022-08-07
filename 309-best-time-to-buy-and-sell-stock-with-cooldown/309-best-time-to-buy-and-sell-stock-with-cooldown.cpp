@@ -32,5 +32,17 @@ public:
         }
         return dp[0][1];
         
+        
+        
+        // Space optimized
+         vector<int>ahead2(2,0),ahead1(2,0),curr(2,0);
+        for(int idx=(n-1);idx>=0;idx--){
+            curr[1] = max(-prices[idx]+ahead1[0],ahead1[1]);
+            curr[0] = max(prices[idx]+ahead2[1],ahead1[0]);  
+            ahead2=ahead1;
+            ahead1=curr;
+        }
+        return ahead1[1];
+        
     }
 };
