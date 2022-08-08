@@ -34,17 +34,36 @@ public:
         
         
         
+        
+        
         // SPACE OPTIMIZATION
-        vector<int>ahead(n+1,0),curr(n+1,0);
-        for(int idx=(n-1);idx>=0;idx--){
-            for(int prev=(idx-1);prev>=-1;prev--){
-                int len = 0+ahead[prev+1];
-                if(prev==-1 || nums[idx]>nums[prev]) len = max(len,1+ahead[idx+1]);
-                curr[prev+1]=len;
+        // vector<int>ahead(n+1,0),curr(n+1,0);
+        // for(int idx=(n-1);idx>=0;idx--){
+        //     for(int prev=(idx-1);prev>=-1;prev--){
+        //         int len = 0+ahead[prev+1];
+        //         if(prev==-1 || nums[idx]>nums[prev]) len = max(len,1+ahead[idx+1]);
+        //         curr[prev+1]=len;
+        //     }
+        //     ahead=curr;
+        // }
+        // return curr[-1+1];
+        
+        
+        
+        
+        // Tabulation - 2nd method
+        vector<int>dp(n,1);
+        for(int idx=1;idx<n;idx++){
+            for(int prev=0;prev<idx;prev++){
+                if(nums[prev]<nums[idx]) dp[idx]=max(dp[idx],1+dp[prev]);
             }
-            ahead=curr;
         }
-        return curr[-1+1];
+        int maxi=0;
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,dp[i]);
+        }
+        return maxi;
+        
     }
     
 };
