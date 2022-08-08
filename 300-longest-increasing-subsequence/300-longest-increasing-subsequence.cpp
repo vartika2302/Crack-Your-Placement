@@ -22,15 +22,29 @@ public:
         
         
         // TABULATION
-        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        // vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        // for(int idx=(n-1);idx>=0;idx--){
+        //     for(int prev=(idx-1);prev>=-1;prev--){
+        //         int len = 0+dp[idx+1][prev+1];
+        //         if(prev==-1 || nums[idx]>nums[prev]) len = max(len,1+dp[idx+1][idx+1]);
+        //         dp[idx][prev+1]=len;
+        //     }
+        // }
+        // return dp[0][-1+1];
+        
+        
+        
+        // SPACE OPTIMIZATION
+        vector<int>ahead(n+1,0),curr(n+1,0);
         for(int idx=(n-1);idx>=0;idx--){
             for(int prev=(idx-1);prev>=-1;prev--){
-                int len = 0+dp[idx+1][prev+1];
-                if(prev==-1 || nums[idx]>nums[prev]) len = max(len,1+dp[idx+1][idx+1]);
-                dp[idx][prev+1]=len;
+                int len = 0+ahead[prev+1];
+                if(prev==-1 || nums[idx]>nums[prev]) len = max(len,1+ahead[idx+1]);
+                curr[prev+1]=len;
             }
+            ahead=curr;
         }
-        return dp[0][-1+1];
+        return curr[-1+1];
     }
     
 };
