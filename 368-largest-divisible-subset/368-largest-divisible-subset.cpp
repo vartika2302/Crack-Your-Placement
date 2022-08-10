@@ -7,7 +7,7 @@ public:
         vector<int>hash(n,0);
         int maxi=1;
         int lastIndex=0;
-        for(int idx=1;idx<n;idx++){
+        for(int idx=0;idx<n;idx++){
             hash[idx]=idx;
             for(int prev_idx=0;prev_idx<idx;prev_idx++){
                 if(nums[idx]%nums[prev_idx]==0 && dp[idx]<1+dp[prev_idx]){
