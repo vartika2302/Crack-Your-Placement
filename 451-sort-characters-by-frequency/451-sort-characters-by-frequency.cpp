@@ -15,9 +15,9 @@ public:
         sort(freq.begin(),freq.end(),compare);
         string res = "";
         for(int i=0;i<freq.size();i++) {
-            while(freq[i].second>0) {
+            int temp=freq[i].second;
+            while(temp--) {
                 res+=freq[i].first;
-                freq[i].second--;
             }
         }
         return res;
