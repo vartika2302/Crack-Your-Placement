@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // Sc - O(n*m)
+    // tc - O(n*m)+O(4*n*m)
     int orangesRotting(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
