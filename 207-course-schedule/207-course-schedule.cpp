@@ -20,9 +20,11 @@ public:
             }
         }
         
+        int cnt=0;
         while(!q.empty()){
             int node = q.front();
             q.pop();
+            cnt++;
             for(auto it: adj[node]){
                 indegree[it]--;
                 if(indegree[it]==0){
@@ -31,10 +33,8 @@ public:
             }
         }
         
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]!=0) return false;
-        }
-        return true;
+        if(cnt==numCourses) return true;
+        return false;
         
     }
 };
