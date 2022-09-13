@@ -42,6 +42,6 @@ int maxDepthOfBinaryTree(TreeNode* root){
       if(curr->right)
         q.push(curr->right);
     }
-    return ans;
   }
+  return ans;
 }
