@@ -20,7 +20,7 @@ private:
         pathsHelper(root->left,targetSum-root->val,paths,temp);
         pathsHelper(root->right,targetSum-root->val,paths,temp);
         temp.pop_back();
-        
+        return;
     }
 public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
