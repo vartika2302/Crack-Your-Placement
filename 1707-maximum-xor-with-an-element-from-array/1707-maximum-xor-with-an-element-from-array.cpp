@@ -81,7 +81,7 @@ public:
                 ans[query_index]=-1;
             }
             else {
-                ans[query_index] = max(ans[query_index],trie->getMax(xi));
+                ans[query_index] = trie->getMax(xi);
             }
         }
         return ans;
