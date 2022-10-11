@@ -13,7 +13,7 @@ class Solution {
 private:
     int f(TreeNode* root, map<TreeNode*,int>& dp) {
         if(!root) return 0;
-        if(dp.count(root)) return dp[root];
+        if(dp[root]) return dp[root];
         int pick = root->val;
         if(root->left) pick+=f(root->left->left,dp)+f(root->left->right,dp);
         if(root->right) pick+=f(root->right->left,dp)+f(root->right->right,dp);
