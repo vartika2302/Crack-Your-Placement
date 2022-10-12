@@ -16,10 +16,8 @@ public:
         ListNode* odd = head;
         ListNode* even = head->next;
         ListNode* o = odd,*e = even;
-        ListNode* preo = NULL;
         while(o && e) {
             o->next = e->next;
-            preo = o;
             o = o->next;
             if(e) {
                 e->next = o ? o->next : NULL;
