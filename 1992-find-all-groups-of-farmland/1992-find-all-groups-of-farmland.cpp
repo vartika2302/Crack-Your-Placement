@@ -6,8 +6,12 @@ private:
         int n = land[0].size();
         queue<pair<int,int>>q;
         q.push({x,y});
-        int dx[]={0,-1,0,+1};
-        int dy[]={-1,0,+1,0};
+        
+        //  int dx[]={0,-1,0,+1};
+        // int dy[]={-1,0,+1,0};
+        int dx[] = {-1,0,+1,0};
+        int dy[] = {0,+1,0,-1};
+        
         int currx,curry;
         while(!q.empty()) {
             currx = q.front().first;
